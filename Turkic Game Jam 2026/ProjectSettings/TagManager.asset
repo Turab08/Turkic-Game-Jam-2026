@@ -46,3 +46,6 @@ TagManager:
   - name: Upper
     uniqueID: 4191952577
     locked: 0
+  - name: Front
+    uniqueID: 2777912637
+    locked: 0
