@@ -9,7 +9,12 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] private Transform spawnTransform;
     [SerializeField] private Transform destroyTransform;
     [SerializeField] private List<FoodData> foodItems;
-    [SerializeField] private Image currentFood;
+    [SerializeField] private List<MenuItem> menuItems;
+    [SerializeField] private Image currentFood1;
+    [SerializeField] private Image currentFood2;
+    [SerializeField] private Image currentFood3;
+    [SerializeField] List<Image> tickImages;
+
     [SerializeField] private GameObject logPrefab;
 
     [SerializeField] private float scrollSpeed = 2f;
@@ -20,11 +25,13 @@ public class ImageScrollManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnFoodCooked += Handle_OnFoodCooked;
+        EventManager.OnIngredientMatched += Handle_OnIngredientMatched;
     }
 
     void OnDisable()
     {
         EventManager.OnFoodCooked -= Handle_OnFoodCooked;
+        EventManager.OnIngredientMatched -= Handle_OnIngredientMatched;
     }
 
     void Start()
@@ -37,9 +44,11 @@ public class ImageScrollManager : MonoBehaviour
 
     private void ChooseNextFood()
     {
-        FoodData chosenFood = foodItems[Random.Range(0, foodItems.Count)];
-        GameManager.instance.SetCurrentFoodToBeCooked(chosenFood);
-        currentFood.sprite = chosenFood.foodImage;
+        MenuItem chosenMenuItem = menuItems[Random.Range(0, menuItems.Count)];
+        GameManager.instance.SetCurrentFoodToBeCooked(chosenMenuItem);
+        currentFood1.sprite = chosenMenuItem.food1.foodImage;
+        currentFood2.sprite = chosenMenuItem.food2.foodImage;
+        currentFood3.sprite = chosenMenuItem.food3.foodImage;
     }
 
     private void Update()
@@ -159,5 +168,20 @@ public class ImageScrollManager : MonoBehaviour
     private void Handle_OnFoodCooked()
     {
         ChooseNextFood();
+    }
+
+    private void Handle_OnIngredientMatched(int index, bool reset)
+    {
+        if (reset)
+        {
+            foreach(var img in tickImages)
+            {
+                img.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            tickImages[index].gameObject.SetActive(true);
+        }
     }
 }

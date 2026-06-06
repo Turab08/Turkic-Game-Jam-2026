@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -7,8 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private List<GameObject> activeItems = new();
-    private FoodData currentFoodToBeCooked = null;
+    private MenuItem currentFoodToBeCooked = null;
+    private List<KeyValuePair<FoodData, bool>> ingredients = new();
     private int gameScore = 0;
+
+    [SerializeField] private TMP_Text foodNameText;
 
     private void Awake()
     {
@@ -41,7 +45,7 @@ public class GameManager : MonoBehaviour
         return activeItems;
     }
 
-    public FoodData GetCurrentFoodToBeCooked()
+    public MenuItem GetCurrentFoodToBeCooked()
     {
         return currentFoodToBeCooked;
     }
@@ -57,13 +61,23 @@ public class GameManager : MonoBehaviour
         return (newScore < 0 ? 0 : newScore);
     }
 
-    public void SetCurrentFoodToBeCooked(FoodData data) 
+    public void SetCurrentFoodToBeCooked(MenuItem data) 
     {
         currentFoodToBeCooked = data;
+        foodNameText.text = data.menuItemName;
+        ingredients.Clear();
+        ingredients.Add(new KeyValuePair<FoodData, bool>(data.food1, false));
+        ingredients.Add(new KeyValuePair<FoodData, bool>(data.food2, false));
+        ingredients.Add(new KeyValuePair<FoodData, bool>(data.food3, false));
     }
 
     private void Handle_OnScoreChanged(int scoreIncrease)
     {
         gameScore = CalculateNewScore(scoreIncrease);
+    }
+
+    public List<KeyValuePair<FoodData, bool>> GetIngredients()
+    {
+        return ingredients;
     }
 }

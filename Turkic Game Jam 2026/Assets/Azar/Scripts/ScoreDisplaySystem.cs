@@ -14,6 +14,6 @@ public class ScoreDisplaySystem : MonoBehaviour
     {
         int newScore = GameManager.instance.CalculateNewScore(scoreChange);
 
-        scoreText.text = "Score\n" + newScore.ToString();
+        scoreText.text = "Score: " + newScore.ToString();
     }
 }

@@ -7,6 +7,7 @@ public static class EventManager
     public static event Action<bool, GameObject> OnDraggingProcess;
     public static event Action OnFoodCooked;
     public static event Action<int> OnScoreChanged;
+    public static event Action<int, bool> OnIngredientMatched;
 
     public static void GameFinished()
     {
@@ -26,5 +27,10 @@ public static class EventManager
     public static void ScoreChanged(int score)
     {
         OnScoreChanged?.Invoke(score);
+    }
+
+    public static void IngredientMatched(int index, bool reset)
+    {
+        OnIngredientMatched?.Invoke(index, reset);
     }
 }

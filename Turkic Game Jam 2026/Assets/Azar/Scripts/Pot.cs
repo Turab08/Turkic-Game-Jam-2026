@@ -10,14 +10,45 @@ public class Pot : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Interactable"))
         {
-            if(other.gameObject.GetComponent<FoodItem>().GetFoodData() == GameManager.instance.GetCurrentFoodToBeCooked())
+            var ingredients = GameManager.instance.GetIngredients();
+
+            bool ingredientMatched = false;
+            for(int i = 0; i < ingredients.Count; i++)
+            {
+                var item = ingredients[i];
+                if(item.Value == false && item.Key == other.gameObject.GetComponent<FoodItem>().GetFoodData())
+                {
+                    ingredients[i] = new KeyValuePair<FoodData, bool>(item.Key, true);
+                    ingredientMatched = true;
+                    EventManager.IngredientMatched(i, false);
+                    break;
+                }
+            }
+
+            if(!ingredientMatched)
+            {
+                EventManager.ScoreChanged(penaltyScore);
+                EventManager.FoodCooked();
+                Destroy(other.gameObject);
+                EventManager.IngredientMatched(0, true);
+                return;
+            }
+
+            bool allIngredientsAdded = true;
+            foreach (var item in ingredients)
+            {
+                if(item.Value == false)
+                {
+                    allIngredientsAdded = false;
+                    break;
+                }
+            }
+
+            if(allIngredientsAdded)
             {
                 EventManager.FoodCooked();
                 EventManager.ScoreChanged(scoreIncrease);
-            }
-            else
-            {
-                EventManager.ScoreChanged(penaltyScore);
+                EventManager.IngredientMatched(0, true);
             }
             Destroy(other.gameObject);
         }
