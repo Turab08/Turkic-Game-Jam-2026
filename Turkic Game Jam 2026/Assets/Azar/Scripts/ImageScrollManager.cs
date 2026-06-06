@@ -8,14 +8,38 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] private GameObject foodItemPrefab;
     [SerializeField] private Transform spawnTransform;
     [SerializeField] private Transform destroyTransform;
-    [SerializeField] private List<Sprite> foodSprites;
+    [SerializeField] private List<FoodData> foodItems;
+    [SerializeField] private Image currentFood;
 
     [SerializeField] private float scrollSpeed = 2f;
     [SerializeField] private float spawnInterval = 1.5f;
 
-    private readonly List<GameObject> activeItems = new();
-
     private float spawnTimer;
+
+    void OnEnable()
+    {
+        EventManager.OnFoodCooked += Handle_OnFoodCooked;
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnFoodCooked -= Handle_OnFoodCooked;
+    }
+
+    void Start()
+    {
+        if(GameManager.instance.GetCurrentFoodToBeCooked() == null)
+        {
+            ChooseNextFood();
+        }
+    }
+
+    private void ChooseNextFood()
+    {
+        FoodData chosenFood = foodItems[Random.Range(0, foodItems.Count)];
+        GameManager.instance.SetCurrentFoodToBeCooked(chosenFood);
+        currentFood.sprite = chosenFood.foodImage;
+    }
 
     private void Update()
     {
@@ -52,31 +76,31 @@ public class ImageScrollManager : MonoBehaviour
         Vector3 spawnPosition = spawnTransform.position;
 
         GameObject item = Instantiate(foodItemPrefab, spawnPosition, Quaternion.identity);
-        AssignRandomSprite(item);
-        activeItems.Add(item);
+        AssignRandomFood(item);
+        GameManager.instance.AddItem(item);
     }
 
-    private void AssignRandomSprite(GameObject item)
+    private void AssignRandomFood(GameObject item)
     {
-        if (foodSprites == null || foodSprites.Count == 0)
+        if (foodItems == null || foodItems.Count == 0)
         {
             Debug.LogWarning("Food sprites list is empty.");
             return;
         }
 
-        SpriteRenderer spriteRenderer = item.GetComponent<SpriteRenderer>();
-
-        if (spriteRenderer == null)
+        FoodItem foodItem = item.GetComponent<FoodItem>();
+        if(foodItem == null)
         {
-            Debug.LogWarning("Spawned food item does not have a SpriteRenderer.");
-            return;
+            Debug.LogWarning("No food item script attached");
         }
-        Sprite randomSprite = foodSprites[Random.Range(0, foodSprites.Count)];
-        spriteRenderer.sprite = randomSprite;
+
+        FoodData randomFood = foodItems[Random.Range(0, foodItems.Count)];
+        foodItem.Initialize(randomFood);
     }
 
     private void MoveItems()
     {
+        var activeItems = GameManager.instance.GetActiveItems(); 
         for (int i = 0; i < activeItems.Count; i++)
         {
             if (activeItems[i] == null)
@@ -93,6 +117,7 @@ public class ImageScrollManager : MonoBehaviour
             return;
         }
 
+        var activeItems = GameManager.instance.GetActiveItems(); 
         for (int i = activeItems.Count - 1; i >= 0; i--)
         {
             GameObject item = activeItems[i];
@@ -119,5 +144,10 @@ public class ImageScrollManager : MonoBehaviour
     public void SetSpawnInterval(float newInterval)
     {
         spawnInterval = Mathf.Max(0.01f, newInterval);
+    }
+
+    private void Handle_OnFoodCooked()
+    {
+        ChooseNextFood();
     }
 }

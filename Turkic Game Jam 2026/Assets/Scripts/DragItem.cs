@@ -10,6 +10,7 @@ public class DragItem : MonoBehaviour
 
     public float followTime = 0.1f;
     private bool isDragging = false;
+    private GameObject currentDraggedObject = null;
 
     void Awake()
     {
@@ -27,6 +28,8 @@ public class DragItem : MonoBehaviour
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
                 isDragging = true;
+                currentDraggedObject = hit.collider.gameObject;
+                EventManager.DraggingProcess(true, currentDraggedObject);
             }
         }
 
@@ -35,6 +38,7 @@ public class DragItem : MonoBehaviour
             if (isDragging)
             {
                 isDragging = false;
+                EventManager.DraggingProcess(false, currentDraggedObject);
             }
         }
         
