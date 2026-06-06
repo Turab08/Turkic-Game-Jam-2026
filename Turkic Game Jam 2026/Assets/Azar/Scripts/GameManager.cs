@@ -46,6 +46,17 @@ public class GameManager : MonoBehaviour
         return currentFoodToBeCooked;
     }
 
+    public int GetGameScore()
+    {
+        return gameScore;
+    }
+
+    public int CalculateNewScore(int scoreChange)
+    {
+        int newScore = gameScore + scoreChange;
+        return (newScore < 0 ? 0 : newScore);
+    }
+
     public void SetCurrentFoodToBeCooked(FoodData data) 
     {
         currentFoodToBeCooked = data;
@@ -53,6 +64,6 @@ public class GameManager : MonoBehaviour
 
     private void Handle_OnScoreChanged(int scoreIncrease)
     {
-        gameScore += scoreIncrease;
+        gameScore = CalculateNewScore(scoreIncrease);
     }
 }

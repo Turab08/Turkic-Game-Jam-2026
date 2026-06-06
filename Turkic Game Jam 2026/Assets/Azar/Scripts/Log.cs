@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodItem : MonoBehaviour
+public class Log : MonoBehaviour
 {
-    private FoodData foodObject;
     private void OnEnable()
     {
         EventManager.OnDraggingProcess += Handle_OnDraggingProcess;
@@ -27,24 +26,5 @@ public class FoodItem : MonoBehaviour
         }
 
         Destroy(this.gameObject);
-    }
-
-    public void Initialize(FoodData obj)
-    {
-        foodObject = obj;
-
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (spriteRenderer == null)
-        {
-            Debug.LogWarning("Spawned food item does not have a SpriteRenderer.");
-            return;
-        }
-        spriteRenderer.sprite = foodObject.foodImage;
-    }
-
-    public FoodData GetFoodData()
-    {
-        return foodObject;
     }
 }

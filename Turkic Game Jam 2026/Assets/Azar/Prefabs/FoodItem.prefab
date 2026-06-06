@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4623999068962154286}
   - component: {fileID: 4842580866814338015}
   - component: {fileID: 641805598310307655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FoodItem
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &641805598310307655
 MonoBehaviour:
   m_ObjectHideFlags: 0

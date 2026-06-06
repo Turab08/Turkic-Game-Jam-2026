@@ -10,6 +10,7 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] private Transform destroyTransform;
     [SerializeField] private List<FoodData> foodItems;
     [SerializeField] private Image currentFood;
+    [SerializeField] private GameObject logPrefab;
 
     [SerializeField] private float scrollSpeed = 2f;
     [SerializeField] private float spawnInterval = 1.5f;
@@ -75,9 +76,18 @@ public class ImageScrollManager : MonoBehaviour
 
         Vector3 spawnPosition = spawnTransform.position;
 
-        GameObject item = Instantiate(foodItemPrefab, spawnPosition, Quaternion.identity);
-        AssignRandomFood(item);
-        GameManager.instance.AddItem(item);
+        float rand = Random.Range(0f, 1f);
+        if(rand <= 0.2f)
+        {
+            GameObject log = Instantiate(logPrefab, spawnPosition, Quaternion.identity);
+            GameManager.instance.AddItem(log);
+        }
+        else
+        {
+            GameObject item = Instantiate(foodItemPrefab, spawnPosition, Quaternion.identity);
+            AssignRandomFood(item);
+            GameManager.instance.AddItem(item);
+        }
     }
 
     private void AssignRandomFood(GameObject item)
