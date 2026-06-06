@@ -11,6 +11,8 @@ public class HotBar : MonoBehaviour
     public Gradient colorGradient;
     public Image fillImage;
 
+    public Animator hotBarAnimator;
+
     void Update()
     {
         slider.value = bonfire.currentSize;
@@ -18,7 +20,14 @@ public class HotBar : MonoBehaviour
         float normalizedValue = (slider.value - slider.minValue) / (slider.maxValue - slider.minValue);
 
         fillImage.color = colorGradient.Evaluate(normalizedValue);
+
+        if (slider.value <= (slider.maxValue + slider.minValue) / 2)
+        {
+            hotBarAnimator.SetBool("IsCold", true);
+        }
+        else
+        {
+            hotBarAnimator.SetBool("IsCold", false);
+        }
     }
-
-
 }

@@ -9,6 +9,8 @@ public class Pot : MonoBehaviour
     [SerializeField] private ParticleSystem splashParticle;
     [SerializeField] private Transform particleSpawnPos;
 
+    [SerializeField] private Animator scoreAnimator;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Interactable"))
@@ -35,6 +37,8 @@ public class Pot : MonoBehaviour
                 EventManager.FoodCooked();
                 Destroy(other.gameObject);
                 EventManager.IngredientMatched(0, true);
+
+                StartCoroutine(PlayScoreAnimation("HasDecreased"));
                 return;
             }
 
@@ -53,8 +57,17 @@ public class Pot : MonoBehaviour
                 EventManager.FoodCooked();
                 EventManager.ScoreChanged(scoreIncrease);
                 EventManager.IngredientMatched(0, true);
+
+                StartCoroutine(PlayScoreAnimation("HasIncreased"));
             }
             Destroy(other.gameObject);
         }
+    }
+
+    IEnumerator PlayScoreAnimation(string name)
+    {
+        scoreAnimator.SetBool(name, true);
+        yield return new WaitForSeconds(0.4f);
+        scoreAnimator.SetBool(name, false);
     }
 }
