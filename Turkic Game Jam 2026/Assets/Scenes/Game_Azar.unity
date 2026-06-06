@@ -1971,7 +1971,6 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1424133999}
   - {fileID: 1857838865}
-  spawnCooldown: 10
   waterDropletObj: {fileID: 6587794942938789600, guid: a94d5afa85d38ea4fa8fc88442cf04cc, type: 3}
   parentObj: {fileID: 47445056}
 --- !u!1 &1603444586
@@ -2401,7 +2400,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3701341671088599205, guid: 524eb90234a7bac47ae85e59f0448204, type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 587360231}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 524eb90234a7bac47ae85e59f0448204, type: 3}
@@ -2775,6 +2774,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CookingPot
       objectReference: {fileID: 0}
+    - target: {fileID: 6452480467532278390, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
+      propertyPath: splashParticle
+      value: 
+      objectReference: {fileID: 7176021289359359081, guid: 4a82ffeac34a84149939cc29b0c9efe6, type: 3}
     - target: {fileID: 7335089375917902545, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

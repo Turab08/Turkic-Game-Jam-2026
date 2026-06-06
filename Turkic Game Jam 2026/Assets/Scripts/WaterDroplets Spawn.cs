@@ -1,38 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterDropletsSpawn : MonoBehaviour
 {
     public Transform[] spawnPoints;
 
-    public float spawnCooldown;
-    private float timeToRespawn;
-
     public GameObject waterDropletObj;
-
     public Transform parentObj;
 
-    void Start() {
-        timeToRespawn = spawnCooldown;    
+    void OnEnable()
+    {
+        EventManager.OnIngredientMatched += Handle_OnIngredientMatched;
     }
 
-    void Update()
+    void OnDisable()
     {
-        timeToRespawn -= Time.deltaTime;
+        EventManager.OnIngredientMatched -= Handle_OnIngredientMatched;
+    }
 
-        if (timeToRespawn <= 0)
-        {
-            SpawnDroplet();
-        }
+    private void Handle_OnIngredientMatched(int index, bool reset)
+    {
+        SpawnDroplet();
     }
 
     void SpawnDroplet()
     {
         int rand = Random.Range(0, spawnPoints.Length);
-
         Instantiate(waterDropletObj, spawnPoints[rand].position, Quaternion.identity, parentObj);
-
-        timeToRespawn = spawnCooldown; 
     }
 }

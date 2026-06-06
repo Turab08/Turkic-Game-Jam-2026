@@ -15,4 +15,4 @@ MonoBehaviour:
   menuItemName: Doner
   food1: {fileID: 11400000, guid: 2900945684aa5c14fb22099fde3ddf08, type: 2}
   food2: {fileID: 11400000, guid: 77e30182fce4d47f59885980f6ce5ec3, type: 2}
-  food3: {fileID: 11400000, guid: 4a18ea1660d0a439480ad81106c45857, type: 2}
+  food3: {fileID: 11400000, guid: 883c77726e3da41b8a4eda597614fd8b, type: 2}

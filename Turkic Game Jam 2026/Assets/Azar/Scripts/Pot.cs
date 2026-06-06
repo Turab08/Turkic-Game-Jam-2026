@@ -6,10 +6,14 @@ public class Pot : MonoBehaviour
 {
     [SerializeField] private int scoreIncrease = 20;
     [SerializeField] private int penaltyScore = -10;
+    [SerializeField] private ParticleSystem splashParticle;
+    [SerializeField] private Transform particleSpawnPos;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Interactable"))
         {
+            ParticleSystem particle = Instantiate(splashParticle, particleSpawnPos.position, Quaternion.identity);
             var ingredients = GameManager.instance.GetIngredients();
 
             bool ingredientMatched = false;
