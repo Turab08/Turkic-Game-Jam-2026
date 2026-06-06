@@ -7,7 +7,7 @@ public class Bonfire : MonoBehaviour
     public float maxSize;
     public float minSize;
 
-    private float currentSize;
+    public float currentSize;
 
     public float shringSpeed;
 
@@ -34,7 +34,7 @@ public class Bonfire : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Water"))
         {
-            currentSize -= 0.5f;
+            currentSize -= 0.2f;
             StartCoroutine(PlayParticle());
             Destroy(other.gameObject);
         }
