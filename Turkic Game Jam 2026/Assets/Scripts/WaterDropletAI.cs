@@ -10,6 +10,8 @@ public class WaterDropletAI : MonoBehaviour
     private Vector2 finalPos;
     private Vector2 currentVelocity = Vector2.zero;
     public float smoothTime;
+
+    public ParticleSystem deathParticle;
     
     Rigidbody2D rb;
 
@@ -33,10 +35,17 @@ public class WaterDropletAI : MonoBehaviour
         transform.position = newPos;
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Bonfire"))
-        {
-            Destroy(gameObject);
-        }    
+    public void Die()
+    {
+        StartCoroutine(Death());
+    }
+
+    IEnumerator Death()
+    {
+        ParticleSystem particle = Instantiate(deathParticle, transform.position, Quaternion.identity);
+        yield return null;
+        Destroy(gameObject);
+        yield return new WaitForSeconds(1);
+        Destroy(particle);
     }
 }

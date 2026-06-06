@@ -31,6 +31,11 @@ public class DragItem : MonoBehaviour
                 currentDraggedObject = hit.collider.gameObject;
                 EventManager.DraggingProcess(true, currentDraggedObject);
             }
+            if (hit.collider != null && hit.collider.CompareTag("Water"))
+            {
+                WaterDropletAI waterDropletAI = hit.collider.gameObject.GetComponent<WaterDropletAI>();
+                waterDropletAI.Die();
+            }
         }
 
         if (Input.GetMouseButtonUp(0))

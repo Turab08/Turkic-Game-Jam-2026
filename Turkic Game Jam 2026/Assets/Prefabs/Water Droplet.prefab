@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8673735035555623334}
   m_Layer: 0
   m_Name: Water Droplet
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,3 +195,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   smoothTime: 5
+  deathParticle: {fileID: 7176021289359359081, guid: 77d577845f5bada439e0674643c5a463, type: 3}

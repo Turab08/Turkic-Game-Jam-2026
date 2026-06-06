@@ -13,6 +13,8 @@ public class Bonfire : MonoBehaviour
 
     public Transform flames;
 
+    public ParticleSystem damageParticle;
+
     void Start()
     {
         currentSize = maxSize;
@@ -30,5 +32,18 @@ public class Bonfire : MonoBehaviour
             currentSize += 0.5f;
             Destroy(other.gameObject);
         }
+        if (other.gameObject.CompareTag("Water"))
+        {
+            currentSize -= 0.5f;
+            StartCoroutine(PlayParticle());
+            Destroy(other.gameObject);
+        }
+    }
+
+    IEnumerator PlayParticle()
+    {
+        ParticleSystem particle = Instantiate(damageParticle, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1);
+        Destroy(particle);
     }
 }
