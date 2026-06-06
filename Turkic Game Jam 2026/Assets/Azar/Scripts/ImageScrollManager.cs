@@ -212,6 +212,7 @@ public class ImageScrollManager : MonoBehaviour
         {
             tickImages[index].gameObject.SetActive(true);
             tickAnims[index].Play(animNames[index], 0, 0f);
+            AudioManager.Instance.PlaySfx(AudioManager.Instance.correctChoice);
         }
     }
 }

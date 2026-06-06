@@ -43,6 +43,7 @@ public class WaterDropletAI : MonoBehaviour
     IEnumerator Death()
     {
         ParticleSystem particle = Instantiate(deathParticle, transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySfx(AudioManager.Instance.waterSplash);
         yield return null;
         Destroy(gameObject);
         yield return new WaitForSeconds(1);
