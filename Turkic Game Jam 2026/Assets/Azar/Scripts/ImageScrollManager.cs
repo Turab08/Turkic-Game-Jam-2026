@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ImageScrollManager : MonoBehaviour
 {
     [SerializeField] private GameObject foodItemPrefab;
+    [SerializeField] private GameObject platePrefab;
     [SerializeField] private Transform spawnTransform;
     [SerializeField] private Transform destroyTransform;
     [SerializeField] private List<FoodData> foodItems;
@@ -14,6 +15,7 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] private Image currentFood2;
     [SerializeField] private Image currentFood3;
     [SerializeField] List<Image> tickImages;
+    private List<GameObject> plateObjects = new();
 
     [SerializeField] private GameObject logPrefab;
 
@@ -84,7 +86,8 @@ public class ImageScrollManager : MonoBehaviour
         }
 
         Vector3 spawnPosition = spawnTransform.position;
-
+        GameObject plate = Instantiate(platePrefab, spawnPosition, Quaternion.identity);
+        plateObjects.Add(plate);
         float rand = Random.Range(0f, 1f);
         if(rand <= 0.2f)
         {
@@ -126,6 +129,11 @@ public class ImageScrollManager : MonoBehaviour
                 continue;
             activeItems[i].transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
         }
+
+        for(int i = 0; i < plateObjects.Count; i++)
+        {
+            plateObjects[i].transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
+        }
     }
 
     private void DestroyPassedItems()
@@ -150,6 +158,23 @@ public class ImageScrollManager : MonoBehaviour
             if (item.transform.position.x <= destroyTransform.position.x)
             {
                 activeItems.RemoveAt(i);
+                Destroy(item);
+            }
+        }
+
+        for (int i = plateObjects.Count - 1; i >= 0; i--)
+        {
+            GameObject item = plateObjects[i];
+
+            if (item == null)
+            {
+                plateObjects.RemoveAt(i);
+                continue;
+            }
+
+            if (item.transform.position.x <= destroyTransform.position.x)
+            {
+                plateObjects.RemoveAt(i);
                 Destroy(item);
             }
         }

@@ -29,7 +29,10 @@
                 {
                     isDragging = true;
                     currentDraggedObject = hit.collider.gameObject;
-                    hit.transform.localScale *= 1.1f;
+                    if(!hit.collider.gameObject.CompareTag("PlayButton") && !hit.collider.gameObject.CompareTag("QuitButton"))
+                    {
+                        hit.transform.localScale *= 1.1f;
+                    }
                     EventManager.DraggingProcess(true, currentDraggedObject);
                 }
                 if (hit.collider != null && hit.collider.CompareTag("Water"))
