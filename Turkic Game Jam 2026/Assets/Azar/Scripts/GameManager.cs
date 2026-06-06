@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnScoreChanged += Handle_OnScoreChanged;
+        EventManager.OnGameFinished += Handle_OnGameFinished;
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnScoreChanged += Handle_OnScoreChanged;
+        EventManager.OnGameFinished -= Handle_OnGameFinished;
     }
 
     public void AddItem(GameObject item)
@@ -79,5 +86,10 @@ public class GameManager : MonoBehaviour
     public List<KeyValuePair<FoodData, bool>> GetIngredients()
     {
         return ingredients;
+    }
+
+    private void Handle_OnGameFinished()
+    {
+        Time.timeScale = 0f;
     }
 }

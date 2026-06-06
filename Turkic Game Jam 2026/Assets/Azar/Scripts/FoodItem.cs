@@ -25,8 +25,16 @@ public class FoodItem : MonoBehaviour
             GameManager.instance.RemoveItem(this.gameObject);
             return;
         }
+        else
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            BoxCollider2D bc = GetComponent<BoxCollider2D>();
 
-        Destroy(this.gameObject);
+            rb.gravityScale = 1.0f;
+            bc.enabled = false;
+        }
+
+        Destroy(this.gameObject, 5f);
     }
 
     public void Initialize(FoodData obj)

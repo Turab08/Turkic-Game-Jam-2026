@@ -24,6 +24,10 @@ public class Bonfire : MonoBehaviour
         currentSize -= shringSpeed * Time.deltaTime;
         currentSize = Mathf.Clamp(currentSize, minSize, maxSize);
         flames.localScale = new Vector3(flames.localScale.x, currentSize, flames.localScale.z); 
+        if(currentSize <= minSize)
+        {
+            EventManager.GameFinished();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
