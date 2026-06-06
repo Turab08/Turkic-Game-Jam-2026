@@ -8,6 +8,8 @@ TagManager:
   - Wood
   - Bonfire
   - Water
+  - PlayButton
+  - QuitButton
   layers:
   - Default
   - TransparentFX
