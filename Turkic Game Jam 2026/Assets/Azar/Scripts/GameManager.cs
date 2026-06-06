@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
     private List<KeyValuePair<FoodData, bool>> ingredients = new();
     private int gameScore = 0;
 
+
     [SerializeField] private TMP_Text foodNameText;
+    [SerializeField] private GameObject gameOverPanel;
+
 
     private void Awake()
     {
@@ -90,6 +93,13 @@ public class GameManager : MonoBehaviour
 
     private void Handle_OnGameFinished()
     {
-        Time.timeScale = 0f;
+        StartCoroutine(GameOver());
+    }
+
+    IEnumerator GameOver()
+    {
+        gameOverPanel.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0;
     }
 }

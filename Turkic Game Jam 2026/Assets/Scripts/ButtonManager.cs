@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("PlayButton"))
@@ -16,5 +21,14 @@ public class ButtonManager : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene("Game");
+    }
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
