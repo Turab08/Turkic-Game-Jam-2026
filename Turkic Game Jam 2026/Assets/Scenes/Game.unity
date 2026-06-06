@@ -348,11 +348,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e492dcfadea4bb24baa525339ad2f00c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4165,6 +4165,8 @@ MonoBehaviour:
   waterSplash: {fileID: 8300000, guid: 709c4f9de685d944f94ffd610060a772, type: 3}
   ingredientAdded: {fileID: 8300000, guid: 9e39252f64155164a9f1b4ccb866df33, type: 3}
   correctChoice: {fileID: 8300000, guid: a867066420e2f2f489f92804095b4b24, type: 3}
+  fireExtinguish: {fileID: 8300000, guid: 303c3fb71bbdaf045b4c57b390cd9a63, type: 3}
+  fuel: {fileID: 8300000, guid: a993b5b08594e254bbfba803ad37938e, type: 3}
 --- !u!1 &1987600128
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,9 +4413,17 @@ PrefabInstance:
       value: CookingPot
       objectReference: {fileID: 0}
     - target: {fileID: 6452480467532278390, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
+      propertyPath: penaltyScore
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452480467532278390, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
       propertyPath: scoreAnimator
       value: 
       objectReference: {fileID: 1134977302}
+    - target: {fileID: 6452480467532278390, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
+      propertyPath: scoreIncrease
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 7335089375917902545, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

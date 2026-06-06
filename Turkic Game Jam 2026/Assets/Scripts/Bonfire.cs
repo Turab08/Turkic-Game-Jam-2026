@@ -34,11 +34,13 @@ public class Bonfire : MonoBehaviour
         if (other.gameObject.CompareTag("Wood"))
         {
             currentSize += 0.5f;
+            AudioManager.Instance.PlaySfx(AudioManager.Instance.fuel);
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Water"))
         {
             currentSize -= 0.2f;
+            AudioManager.Instance.PlaySfx(AudioManager.Instance.fireExtinguish);
             StartCoroutine(PlayParticle());
             Destroy(other.gameObject);
         }

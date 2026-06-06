@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip waterSplash;
     public AudioClip ingredientAdded;   
     public AudioClip correctChoice; 
+    public AudioClip fireExtinguish;
+    public AudioClip fuel;
 
     void Awake()
     {
