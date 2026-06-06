@@ -2382,6 +2382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodItemPrefab: {fileID: 5541095041245871165, guid: 879ce575f7f1448018323aadddbda19c, type: 3}
+  platePrefab: {fileID: 4303209625238434538, guid: 43ecb064c230e2f40ad66ff6cf282fa8, type: 3}
   spawnTransform: {fileID: 1429214182}
   destroyTransform: {fileID: 1403950647}
   foodItems:
