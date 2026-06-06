@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] private Image currentFood3;
     [SerializeField] List<Image> tickImages;
     private List<GameObject> plateObjects = new();
+    private string[] animNames = new[] {"Tick1_Anim", "Tick2_Anim", "Tick3_Anim"}; 
+
+    [SerializeField] private List<Animator> tickAnims;
 
     [SerializeField] private GameObject logPrefab;
 
@@ -46,7 +50,7 @@ public class ImageScrollManager : MonoBehaviour
 
     private void ChooseNextFood()
     {
-        MenuItem chosenMenuItem = menuItems[Random.Range(0, menuItems.Count)];
+        MenuItem chosenMenuItem = menuItems[UnityEngine.Random.Range(0, menuItems.Count)];
         GameManager.instance.SetCurrentFoodToBeCooked(chosenMenuItem);
         currentFood1.sprite = chosenMenuItem.food1.foodImage;
         currentFood2.sprite = chosenMenuItem.food2.foodImage;
@@ -88,7 +92,7 @@ public class ImageScrollManager : MonoBehaviour
         Vector3 spawnPosition = spawnTransform.position;
         GameObject plate = Instantiate(platePrefab, spawnPosition, Quaternion.identity);
         plateObjects.Add(plate);
-        float rand = Random.Range(0f, 1f);
+        float rand = UnityEngine.Random.Range(0f, 1f);
         if(rand <= 0.2f)
         {
             GameObject log = Instantiate(logPrefab, spawnPosition, Quaternion.identity);
@@ -116,7 +120,7 @@ public class ImageScrollManager : MonoBehaviour
             Debug.LogWarning("No food item script attached");
         }
 
-        FoodData randomFood = foodItems[Random.Range(0, foodItems.Count)];
+        FoodData randomFood = foodItems[UnityEngine.Random.Range(0, foodItems.Count)];
         foodItem.Initialize(randomFood);
     }
 
@@ -207,6 +211,7 @@ public class ImageScrollManager : MonoBehaviour
         else
         {
             tickImages[index].gameObject.SetActive(true);
+            tickAnims[index].Play(animNames[index], 0, 0f);
         }
     }
 }
