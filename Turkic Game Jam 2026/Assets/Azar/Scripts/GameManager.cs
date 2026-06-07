@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private List<KeyValuePair<FoodData, bool>> ingredients = new();
     private int gameScore = 0;
     private float scoreMultiplier = 1;
-
+    private float difficultyPercentage = 0.2f;
 
     [SerializeField] private TMP_Text foodNameText;
     [SerializeField] private GameObject gameOverPanel;
@@ -75,6 +75,11 @@ public class GameManager : MonoBehaviour
     public int GetGameScore()
     {
         return gameScore;
+    }
+
+    public float GetDifficultyPercentage()
+    {
+        return difficultyPercentage;
     }
 
     public int CalculateNewScore(int scoreChange)

@@ -2106,6 +2106,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodNameText: {fileID: 1603444588}
   gameOverPanel: {fileID: 1319072546}
+  pausePanel: {fileID: 0}
+  gameOverAnimator: {fileID: 0}
+  pauseAnimator: {fileID: 0}
 --- !u!114 &1081964347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2408,8 +2411,8 @@ MonoBehaviour:
   - {fileID: 1251740485}
   - {fileID: 2099966161}
   logPrefab: {fileID: 3239222243099762344, guid: 8f5da4189c470ef44808360aaeaea64f, type: 3}
-  scrollSpeed: 2
-  spawnInterval: 1.5
+  scrollSpeed: 5
+  spawnInterval: 0.6
 --- !u!4 &1174251091
 Transform:
   m_ObjectHideFlags: 0

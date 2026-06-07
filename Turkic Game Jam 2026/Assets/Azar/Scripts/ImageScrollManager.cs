@@ -18,6 +18,7 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] List<Image> tickImages;
     private List<GameObject> plateObjects = new();
     private string[] animNames = new[] {"Tick1_Anim", "Tick2_Anim", "Tick3_Anim"}; 
+    private List<FoodData> notSpawnedFoods = new();
 
     [SerializeField] private List<Animator> tickAnims;
 
@@ -89,6 +90,11 @@ public class ImageScrollManager : MonoBehaviour
             return;
         }
 
+        if(notSpawnedFoods.Count == 0)
+        {
+            notSpawnedFoods = new List<FoodData>(foodItems);
+        }
+
         Vector3 spawnPosition = spawnTransform.position;
         GameObject plate = Instantiate(platePrefab, spawnPosition, Quaternion.identity);
         plateObjects.Add(plate);
@@ -120,7 +126,8 @@ public class ImageScrollManager : MonoBehaviour
             Debug.LogWarning("No food item script attached");
         }
 
-        FoodData randomFood = foodItems[UnityEngine.Random.Range(0, foodItems.Count)];
+        FoodData randomFood = notSpawnedFoods[UnityEngine.Random.Range(0, notSpawnedFoods.Count)];
+        notSpawnedFoods.Remove(randomFood);
         foodItem.Initialize(randomFood);
     }
 
@@ -197,6 +204,8 @@ public class ImageScrollManager : MonoBehaviour
     private void Handle_OnFoodCooked()
     {
         ChooseNextFood();
+        spawnInterval = spawnInterval * (1f - GameManager.instance.GetDifficultyPercentage());
+        scrollSpeed = scrollSpeed * (1f + GameManager.instance.GetDifficultyPercentage()); 
     }
 
     private void Handle_OnIngredientMatched(int index, bool reset)

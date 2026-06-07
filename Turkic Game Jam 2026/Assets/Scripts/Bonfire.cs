@@ -15,6 +15,16 @@ public class Bonfire : MonoBehaviour
 
     public ParticleSystem damageParticle;
 
+    void OnEnable()
+    {
+        EventManager.OnFoodCooked += Handle_OnFoodCooked;
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnFoodCooked -= Handle_OnFoodCooked;
+    }
+
     void Start()
     {
         currentSize = maxSize;
@@ -51,5 +61,10 @@ public class Bonfire : MonoBehaviour
         ParticleSystem particle = Instantiate(damageParticle, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1);
         Destroy(particle);
+    }
+
+    private void Handle_OnFoodCooked()
+    {
+        shringSpeed = shringSpeed * (1f + GameManager.instance.GetDifficultyPercentage());
     }
 }
