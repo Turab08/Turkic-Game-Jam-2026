@@ -16,6 +16,7 @@ public class Pot : MonoBehaviour
         if(other.gameObject.CompareTag("Interactable"))
         {
             ParticleSystem particle = Instantiate(splashParticle, particleSpawnPos.position, Quaternion.identity);
+            Destroy(particle.gameObject, 2);
             AudioManager.Instance.PlaySfx(AudioManager.Instance.ingredientAdded);
             var ingredients = GameManager.instance.GetIngredients();
 
