@@ -33,7 +33,7 @@ public class Bonfire : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Wood"))
         {
-            currentSize += 0.5f;
+            currentSize += 0.2f;
             AudioManager.Instance.PlaySfx(AudioManager.Instance.fuel);
             Destroy(other.gameObject);
         }

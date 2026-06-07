@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TMP_Text foodNameText;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private Animator gameOverAnimator;
+    [SerializeField] private Animator pauseAnimator;
 
 
     private void Awake()
@@ -29,12 +32,16 @@ public class GameManager : MonoBehaviour
     {
         EventManager.OnScoreChanged += Handle_OnScoreChanged;
         EventManager.OnGameFinished += Handle_OnGameFinished;
+        EventManager.OnGamePaused += Handle_OnGamePaused;
+        EventManager.OnGameResumed += Handle_OnGameResumed;
     }
 
     void OnDisable()
     {
-        EventManager.OnScoreChanged += Handle_OnScoreChanged;
+        EventManager.OnScoreChanged -= Handle_OnScoreChanged;
         EventManager.OnGameFinished -= Handle_OnGameFinished;
+         EventManager.OnGamePaused -= Handle_OnGamePaused;
+        EventManager.OnGameResumed -= Handle_OnGameResumed;
     }
 
     public void AddItem(GameObject item)
@@ -96,10 +103,36 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GameOver());
     }
 
+    private void Handle_OnGamePaused()
+    {
+        StartCoroutine(Pause());
+    }
+    private void Handle_OnGameResumed()
+    {
+        StartCoroutine(Resume());
+    }
+
     IEnumerator GameOver()
     {
         gameOverPanel.SetActive(true);
+        gameOverAnimator.SetBool("IsPaused", true);
         yield return new WaitForSeconds(1f);
         Time.timeScale = 0;
+    }
+
+    IEnumerator Pause()
+    {
+        pausePanel.SetActive(true);
+        pauseAnimator.SetBool("IsPaused", true);
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0;
+    }
+
+    IEnumerator Resume()
+    {
+        pausePanel.SetActive(false);
+        pauseAnimator.SetBool("IsPaused", false);
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 1;
     }
 }

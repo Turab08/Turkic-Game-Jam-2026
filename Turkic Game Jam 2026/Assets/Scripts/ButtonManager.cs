@@ -15,7 +15,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayButton"))
         {
-             SceneManager.LoadScene("Game");
+            StartCoroutine(LoadScene());
         }
         else if (other.gameObject.CompareTag("QuitButton"))
         {
@@ -30,5 +30,22 @@ public class ButtonManager : MonoBehaviour
     public void Menu()
     {
         SceneManager.LoadScene("Menu");
+    }
+    public void Pause()
+    {
+        EventManager.GamePaused();
+    }
+    public void Resume()
+    {
+        EventManager.GameResume();
+    }
+
+    IEnumerator LoadScene()
+    {
+        AudioManager.Instance.PlaySfx(AudioManager.Instance.ingredientAdded);
+
+        yield return new WaitForSeconds(0.3f);
+
+        SceneManager.LoadScene("Game");
     }
 }

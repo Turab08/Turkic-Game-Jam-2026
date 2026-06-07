@@ -9,6 +9,7 @@
         private Vector2 velocity = Vector2.zero;
 
         public float followTime = 0.1f;
+        public float rotationSpeed = 720f;
         private bool isDragging = false;
         private GameObject currentDraggedObject = null;
 
@@ -59,7 +60,23 @@
             {
                 Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 nextPos = Vector2.SmoothDamp(rb.position, mouseWorldPos, ref velocity, followTime);
+
+                Vector2 moveDirection = nextPos - rb.position;
                 rb.MovePosition(nextPos);
+
+                RotateTowardsMovement(moveDirection);
+            }
+        }
+
+        void RotateTowardsMovement(Vector2 moveDirection)
+        {
+            if (moveDirection.magnitude >= 0.001f)
+            {
+                float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            
+                Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+                
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);        
             }
         }
     }
