@@ -8,6 +8,21 @@ public class PotCap : MonoBehaviour
     [SerializeField] private GameObject capOnPot;
     [SerializeField] private Transform originalPosition;
 
+    private DragItem dragItem;
+
+    void Start()
+    {
+        dragItem = GetComponent<DragItem>();
+    }
+
+    void Update()
+    {
+        if (!dragItem.isDragging)
+        {
+            ReturnBack();
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Pot"))
@@ -15,10 +30,6 @@ public class PotCap : MonoBehaviour
             capOnPot.SetActive(true);
             gameObject.SetActive(false);
 
-            transform.position = originalPosition.position;
-            transform.rotation = Quaternion.identity;
-
-            DragItem dragItem = GetComponent<DragItem>();
             dragItem.isDragging = false;
 
             EventManager.GamePaused();
@@ -29,7 +40,11 @@ public class PotCap : MonoBehaviour
     {
         capOnPot.SetActive(false);
         gameObject.SetActive(true);
-        
+
+        transform.position = originalPosition.position;
+        transform.rotation = Quaternion.identity;
+
+        dragItem.isDragging = false;
     }
 
 }
