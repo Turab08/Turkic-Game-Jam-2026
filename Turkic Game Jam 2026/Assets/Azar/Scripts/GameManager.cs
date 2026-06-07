@@ -84,7 +84,15 @@ public class GameManager : MonoBehaviour
 
     public int CalculateNewScore(int scoreChange)
     {
-        int newScore = gameScore + (int)Math.Floor(scoreChange * scoreMultiplier);
+        int newScore;
+        
+        if (scoreChange > 0) {
+            newScore = gameScore + (int)Math.Floor(scoreChange * scoreMultiplier);
+        }
+        else
+        {
+            newScore = gameScore + scoreChange;
+        }
 
         if (scoreChange > 0)
         {
