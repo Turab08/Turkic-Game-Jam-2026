@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     private MenuItem currentFoodToBeCooked = null;
     private List<KeyValuePair<FoodData, bool>> ingredients = new();
     private int gameScore = 0;
+    private float scoreMultiplier = 1;
 
 
     [SerializeField] private TMP_Text foodNameText;
@@ -77,7 +79,17 @@ public class GameManager : MonoBehaviour
 
     public int CalculateNewScore(int scoreChange)
     {
-        int newScore = gameScore + scoreChange;
+        int newScore = gameScore + (int)Math.Floor(scoreChange * scoreMultiplier);
+
+        if (scoreChange > 0)
+        {
+            scoreMultiplier *= 1.2f;
+        }
+        else
+        {
+            scoreMultiplier = 1;
+        }
+
         return (newScore < 0 ? 0 : newScore);
     }
 
