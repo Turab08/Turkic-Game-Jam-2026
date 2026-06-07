@@ -10,7 +10,7 @@
 
         public float followTime = 0.1f;
         public float rotationSpeed = 720f;
-        private bool isDragging = false;
+        public bool isDragging = false;
         private GameObject currentDraggedObject = null;
 
         void Awake()
@@ -30,7 +30,7 @@
                 {
                     isDragging = true;
                     currentDraggedObject = hit.collider.gameObject;
-                    if(!hit.collider.gameObject.CompareTag("PlayButton") && !hit.collider.gameObject.CompareTag("QuitButton"))
+                    if(!hit.collider.gameObject.CompareTag("PlayButton") && !hit.collider.gameObject.CompareTag("QuitButton") && !hit.collider.gameObject.CompareTag("Cap"))
                     {
                         hit.transform.localScale *= 1.1f;
                     }

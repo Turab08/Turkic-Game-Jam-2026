@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Animator gameOverAnimator;
     [SerializeField] private Animator pauseAnimator;
 
+    [SerializeField] private PotCap potCap;
+
+
 
     private void Awake()
     {
@@ -132,7 +135,8 @@ public class GameManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         pauseAnimator.SetBool("IsPaused", false);
-        yield return new WaitForSeconds(1f);
+        potCap.ReturnBack();
         Time.timeScale = 1;
+        yield return new WaitForSeconds(1f);
     }
 }

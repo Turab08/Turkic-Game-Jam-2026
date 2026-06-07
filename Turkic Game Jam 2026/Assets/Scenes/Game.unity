@@ -666,6 +666,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284844223}
   m_CullTransparentMesh: 1
+--- !u!1 &309628558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309628559}
+  m_Layer: 0
+  m_Name: Cap Position
+  m_TagString: Cap
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309628559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309628558}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.85, y: -3.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &311657490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,6 +3254,7 @@ MonoBehaviour:
   pausePanel: {fileID: 1003585586}
   gameOverAnimator: {fileID: 1319072550}
   pauseAnimator: {fileID: 1003585588}
+  potCap: {fileID: 1148175907}
 --- !u!114 &1081964347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3481,9 +3513,10 @@ GameObject:
   - component: {fileID: 1148175904}
   - component: {fileID: 1148175903}
   - component: {fileID: 1148175902}
+  - component: {fileID: 1148175907}
   m_Layer: 0
   m_Name: Pot Cap
-  m_TagString: Untagged
+  m_TagString: Cap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3502,6 +3535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followTime: 0.05
   rotationSpeed: 720
+  isDragging: 0
 --- !u!50 &1148175903
 Rigidbody2D:
   serializedVersion: 4
@@ -3641,6 +3675,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1148175907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148175901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d57e7d299c4675347afc63f093e2c979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capOnPot: {fileID: 1208470216}
+  originalPosition: {fileID: 309628559}
 --- !u!1 &1157410373
 GameObject:
   m_ObjectHideFlags: 0
@@ -5750,6 +5798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CookingPot
       objectReference: {fileID: 0}
+    - target: {fileID: 4645927888313121531, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
+      propertyPath: m_TagString
+      value: Pot
+      objectReference: {fileID: 0}
     - target: {fileID: 6452480467532278390, guid: 5ab98783cb12f554c9f24b1089606dfe, type: 3}
       propertyPath: penaltyScore
       value: -200
@@ -5890,3 +5942,4 @@ SceneRoots:
   - {fileID: 1479499735}
   - {fileID: 5222404445030087253}
   - {fileID: 1148175906}
+  - {fileID: 309628559}
