@@ -66,5 +66,6 @@ public class Bonfire : MonoBehaviour
     private void Handle_OnFoodCooked()
     {
         shringSpeed = shringSpeed * (1f + GameManager.instance.GetDifficultyPercentage());
+        shringSpeed = Mathf.Clamp(shringSpeed, 0.01f, 0.04f);
     }
 }

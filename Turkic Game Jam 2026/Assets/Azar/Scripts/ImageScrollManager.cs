@@ -28,6 +28,7 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] private float spawnInterval = 1.5f;
 
     private float spawnTimer;
+    private float woodSpawnChance = 0.2f;
 
     void OnEnable()
     {
@@ -99,7 +100,7 @@ public class ImageScrollManager : MonoBehaviour
         GameObject plate = Instantiate(platePrefab, spawnPosition, Quaternion.identity);
         plateObjects.Add(plate);
         float rand = UnityEngine.Random.Range(0f, 1f);
-        if(rand <= 0.2f)
+        if(rand <= woodSpawnChance)
         {
             GameObject log = Instantiate(logPrefab, spawnPosition, Quaternion.identity);
             GameManager.instance.AddItem(log);
@@ -205,7 +206,11 @@ public class ImageScrollManager : MonoBehaviour
     {
         ChooseNextFood();
         spawnInterval = spawnInterval * (1f - GameManager.instance.GetDifficultyPercentage());
-        scrollSpeed = scrollSpeed * (1f + GameManager.instance.GetDifficultyPercentage()); 
+        spawnInterval = Mathf.Clamp(spawnInterval, 0.75f, 3f);
+        scrollSpeed = scrollSpeed * (1f + GameManager.instance.GetDifficultyPercentage());
+        scrollSpeed = Mathf.Clamp(scrollSpeed, 1f, 4f); 
+        woodSpawnChance += 0.0066f;
+        woodSpawnChance = Mathf.Clamp(woodSpawnChance, 0.2f, 0.3f);
     }
 
     private void Handle_OnIngredientMatched(int index, bool reset)
