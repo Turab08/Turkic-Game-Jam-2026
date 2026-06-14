@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FoodItem : MonoBehaviour
 {
     private FoodData foodObject;
+    private SpriteRenderer spriteRenderer;
+    private Material propertyMaterial;
+
     private void OnEnable()
     {
         EventManager.OnDraggingProcess += Handle_OnDraggingProcess;
@@ -37,11 +38,26 @@ public class FoodItem : MonoBehaviour
         Destroy(this.gameObject, 5f);
     }
 
+    private void Start()
+    {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        propertyMaterial = spriteRenderer.material;
+
+        // outline is off at the start
+        propertyMaterial.SetFloat("_IsHovered", 0f);
+    }
+
     public void Initialize(FoodData obj)
     {
         foodObject = obj;
 
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
 
         if (spriteRenderer == null)
         {
@@ -54,5 +70,17 @@ public class FoodItem : MonoBehaviour
     public FoodData GetFoodData()
     {
         return foodObject;
+    }
+
+    private void OnMouseEnter()
+    {
+        EventManager.InteractableHovered(true);
+        propertyMaterial.SetFloat("_IsHovered", 1f);
+    }
+
+    private void OnMouseExit()
+    {
+        EventManager.InteractableHovered(false);
+        propertyMaterial.SetFloat("_IsHovered", 0f);
     }
 }

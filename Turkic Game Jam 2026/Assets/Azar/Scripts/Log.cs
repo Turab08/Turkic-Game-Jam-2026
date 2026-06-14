@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Log : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+    private Material propertyMaterial;
     private void OnEnable()
     {
         EventManager.OnDraggingProcess += Handle_OnDraggingProcess;
@@ -12,6 +12,19 @@ public class Log : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnDraggingProcess -= Handle_OnDraggingProcess;
+    }
+
+    private void Start()
+    {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        propertyMaterial = spriteRenderer.material;
+
+        // outline is off at the start
+        propertyMaterial.SetFloat("_IsHovered", 0f);
+        //propertyMaterial.SetFloat("_OutlineThickness", 4f);
     }
 
     private void Handle_OnDraggingProcess(bool dragState, GameObject draggedObject)
@@ -34,5 +47,17 @@ public class Log : MonoBehaviour
         }
 
         Destroy(this.gameObject, 5f);
+    }
+
+    private void OnMouseEnter()
+    {
+        EventManager.InteractableHovered(true);
+        propertyMaterial.SetFloat("_IsHovered", 1f);
+    }
+
+    private void OnMouseExit()
+    {
+        EventManager.InteractableHovered(false);
+        propertyMaterial.SetFloat("_IsHovered", 0f);
     }
 }

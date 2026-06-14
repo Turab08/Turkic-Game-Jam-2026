@@ -45,6 +45,7 @@ public class Bonfire : MonoBehaviour
         {
             currentSize += 0.2f;
             AudioManager.Instance.PlaySfx(AudioManager.Instance.fuel);
+            EventManager.DraggingProcess(false, other.gameObject);
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Water"))

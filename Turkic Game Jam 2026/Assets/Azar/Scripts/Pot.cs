@@ -37,6 +37,7 @@ public class Pot : MonoBehaviour
             {
                 EventManager.ScoreChanged(penaltyScore);
                 EventManager.FoodCooked();
+                EventManager.DraggingProcess(false, other.gameObject);
                 Destroy(other.gameObject);
                 EventManager.IngredientMatched(0, true);
 
@@ -62,6 +63,7 @@ public class Pot : MonoBehaviour
 
                 StartCoroutine(PlayScoreAnimation("HasIncreased"));
             }
+            EventManager.DraggingProcess(false, other.gameObject);
             Destroy(other.gameObject);
         }
     }
