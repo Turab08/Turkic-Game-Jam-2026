@@ -10,6 +10,7 @@ public static class EventManager
     public static event Action OnFoodCooked;
     public static event Action<int> OnScoreChanged;
     public static event Action<int, bool> OnIngredientMatched;
+    public static event Action<bool> OnInteractableHovered;
 
     public static void GameFinished()
     {
@@ -43,5 +44,10 @@ public static class EventManager
     public static void IngredientMatched(int index, bool reset)
     {
         OnIngredientMatched?.Invoke(index, reset);
+    }
+
+    public static void InteractableHovered(bool hoverState)
+    {
+        OnInteractableHovered?.Invoke(hoverState);
     }
 }

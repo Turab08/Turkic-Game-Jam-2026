@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PotCap : MonoBehaviour
@@ -9,9 +6,20 @@ public class PotCap : MonoBehaviour
     [SerializeField] private Transform originalPosition;
 
     private DragItem dragItem;
+    private SpriteRenderer spriteRenderer;
+    private Material propertyMaterial;
 
     void Start()
     {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        propertyMaterial = spriteRenderer.material;
+
+        // outline is off at the start
+        propertyMaterial.SetFloat("_IsHovered", 0f);
+        //propertyMaterial.SetFloat("_OutlineThickness", 4f);
         dragItem = GetComponent<DragItem>();
     }
 
@@ -29,9 +37,8 @@ public class PotCap : MonoBehaviour
         {
             capOnPot.SetActive(true);
             gameObject.SetActive(false);
-
             dragItem.isDragging = false;
-
+            EventManager.DraggingProcess(false, collision.gameObject);
             EventManager.GamePaused();
         }
     }
@@ -47,4 +54,15 @@ public class PotCap : MonoBehaviour
         dragItem.isDragging = false;
     }
 
+    private void OnMouseEnter()
+    {
+        EventManager.InteractableHovered(true);
+        propertyMaterial.SetFloat("_IsHovered", 1f);
+    }
+
+    private void OnMouseExit()
+    {
+        EventManager.InteractableHovered(false);
+        propertyMaterial.SetFloat("_IsHovered", 0f);
+    }
 }
