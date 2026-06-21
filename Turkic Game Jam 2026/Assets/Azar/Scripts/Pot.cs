@@ -10,6 +10,7 @@ public class Pot : MonoBehaviour
     [SerializeField] private Transform particleSpawnPos;
 
     [SerializeField] private Animator scoreAnimator;
+    [SerializeField] private Animator wrongIngredientAnimator;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -40,7 +41,7 @@ public class Pot : MonoBehaviour
                 EventManager.DraggingProcess(false, other.gameObject);
                 Destroy(other.gameObject);
                 EventManager.IngredientMatched(0, true);
-
+                wrongIngredientAnimator.SetTrigger("WrongIngredient");
                 StartCoroutine(PlayScoreAnimation("HasDecreased"));
                 return;
             }

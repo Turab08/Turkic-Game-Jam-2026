@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   foodName: Tomato
-  foodImage: {fileID: 21300000, guid: a05378e9629e048599f720f569a9b6e9, type: 3}
+  foodImage: {fileID: 21300000, guid: f884d756316da85478a2a287e0937846, type: 3}
