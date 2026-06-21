@@ -11,43 +11,39 @@ public class MouseHover : MonoBehaviour
     {
         EventManager.OnInteractableHovered += Handle_OnInteractableHover;
         EventManager.OnDraggingProcess += Handle_OnDraggingProcess;
-        EventManager.OnEnemyHovered += Handle_OnEnemyHover;
     }
 
     private void OnDisable()
     {
         EventManager.OnInteractableHovered -= Handle_OnInteractableHover;
         EventManager.OnDraggingProcess -= Handle_OnDraggingProcess;
-        EventManager.OnEnemyHovered -= Handle_OnEnemyHover;
 
     }
 
-    private void Handle_OnInteractableHover(bool hoverState)
+    private void Handle_OnInteractableHover(bool hoverState, string iconType)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-        { 
-            return;
+        Texture2D iconToApply = null;
+
+        switch(iconType)
+        {
+            case "Grab":
+                iconToApply = interactableMouseTexture;
+                break;
+            case "Attack":
+                iconToApply = attackMouseTexture;
+                break;
+            default:
+                iconToApply = null;
+                break;
         }
-        
+
         if(hoverState == false)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
         else
         {
-            Cursor.SetCursor(interactableMouseTexture, Vector2.zero, CursorMode.Auto);
-        }
-    }
-
-    private void Handle_OnEnemyHover(bool hoverState)
-    {
-        if(hoverState == false)
-        {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        }
-        else
-        {
-            Cursor.SetCursor(attackMouseTexture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(iconToApply, Vector2.zero, CursorMode.Auto);
         }
     }
 

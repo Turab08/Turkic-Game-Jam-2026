@@ -10,8 +10,7 @@ public static class EventManager
     public static event Action OnFoodCooked;
     public static event Action<int> OnScoreChanged;
     public static event Action<int, bool> OnIngredientMatched;
-    public static event Action<bool> OnInteractableHovered;
-    public static event Action<bool> OnEnemyHovered;
+    public static event Action<bool, string> OnInteractableHovered;
 
     public static void GameFinished()
     {
@@ -47,12 +46,9 @@ public static class EventManager
         OnIngredientMatched?.Invoke(index, reset);
     }
 
-    public static void InteractableHovered(bool hoverState)
+    public static void InteractableHovered(bool hoverState, string iconIndex)
     {
-        OnInteractableHovered?.Invoke(hoverState);
+        OnInteractableHovered?.Invoke(hoverState, iconIndex);
     }
-    public static void EnemyHovered(bool hoverState)
-    {
-        OnEnemyHovered?.Invoke(hoverState);
-    }
+
 }
