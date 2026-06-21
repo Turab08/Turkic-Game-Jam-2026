@@ -13,6 +13,10 @@ public class HotBar : MonoBehaviour
 
     public Animator hotBarAnimator;
 
+    public Image currentImage;
+    public Sprite fireImage;
+    public Sprite snowFlakeImage;
+
     void Update()
     {
         slider.value = bonfire.currentSize;
@@ -24,10 +28,12 @@ public class HotBar : MonoBehaviour
         if (slider.value <= (slider.maxValue + slider.minValue) / 2)
         {
             hotBarAnimator.SetBool("IsCold", true);
+            currentImage.sprite = snowFlakeImage;
         }
         else
         {
             hotBarAnimator.SetBool("IsCold", false);
+            currentImage.sprite = fireImage;
         }
     }
 }
