@@ -15,7 +15,8 @@ public class ButtonManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayButton"))
         {
-            StartCoroutine(LoadScene());
+            LevelLoader.Instance.LoadNextLevel();
+            //StartCoroutine(LoadScene());
         }
         else if (other.gameObject.CompareTag("QuitButton"))
         {
@@ -25,7 +26,7 @@ public class ButtonManager : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene("Game");
+        LevelLoader.Instance.LoadThisLevel();
     }
     public void Menu()
     {

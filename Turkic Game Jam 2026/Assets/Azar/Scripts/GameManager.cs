@@ -144,16 +144,16 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         gameOverAnimator.SetBool("IsPaused", true);
-        yield return new WaitForSeconds(1f);
         Time.timeScale = 0;
+        yield return null;
     }
 
     IEnumerator Pause()
     {
         pausePanel.SetActive(true);
         pauseAnimator.SetBool("IsPaused", true);
-        yield return new WaitForSeconds(1f);
         Time.timeScale = 0;
+        yield return null;
     }
 
     IEnumerator Resume()
