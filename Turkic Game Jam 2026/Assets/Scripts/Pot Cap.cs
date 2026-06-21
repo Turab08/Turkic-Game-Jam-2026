@@ -56,13 +56,13 @@ public class PotCap : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        EventManager.InteractableHovered(true);
+        EventManager.InteractableHovered(true, "Grab");
         propertyMaterial.SetFloat("_IsHovered", 1f);
     }
 
     private void OnMouseExit()
     {
-        EventManager.InteractableHovered(false);
+        EventManager.InteractableHovered(false, "Grab");
         propertyMaterial.SetFloat("_IsHovered", 0f);
     }
 }

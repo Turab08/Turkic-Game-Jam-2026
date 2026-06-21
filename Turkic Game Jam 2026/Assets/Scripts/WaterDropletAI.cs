@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaterDropletAI : MonoBehaviour
@@ -10,6 +8,9 @@ public class WaterDropletAI : MonoBehaviour
     private Vector2 finalPos;
     private Vector2 currentVelocity = Vector2.zero;
     public float smoothTime;
+
+    private SpriteRenderer spriteRenderer;
+    private Material propertyMaterial;
 
     public ParticleSystem deathParticle;
     
@@ -23,6 +24,16 @@ public class WaterDropletAI : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Bonfire").transform;
+
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        propertyMaterial = spriteRenderer.material;
+
+        // outline is off at the start
+        propertyMaterial.SetFloat("_IsHovered", 0f);
+        propertyMaterial.SetFloat("_OutlineThickness", 8f);
     }
 
     void FixedUpdate()
@@ -44,8 +55,22 @@ public class WaterDropletAI : MonoBehaviour
     {
         ParticleSystem particle = Instantiate(deathParticle, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySfx(AudioManager.Instance.waterSplash);
+        EventManager.InteractableHovered(false, "Attack");
         Destroy(gameObject);
         yield return new WaitForSeconds(1);
         Destroy(particle.gameObject);
+    }
+
+    private void OnMouseEnter()
+    {
+        EventManager.InteractableHovered(true, "Attack");
+        propertyMaterial.SetFloat("_IsHovered", 1f);
+        propertyMaterial.SetColor("_OutlineColor", Color.red);
+    }
+
+    private void OnMouseExit()
+    {
+        EventManager.InteractableHovered(false, "Attack");
+        propertyMaterial.SetFloat("_IsHovered", 0f);
     }
 }
