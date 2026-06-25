@@ -109,7 +109,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.544, y: 1.376}
+  m_Size: {x: 50.879997, y: 27.526875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -266,6 +266,7 @@ MonoBehaviour:
   splashParticle: {fileID: 7176021289359359081, guid: 4a82ffeac34a84149939cc29b0c9efe6, type: 3}
   particleSpawnPos: {fileID: 7287797732578898261}
   scoreAnimator: {fileID: 0}
+  wrongIngredientAnimator: {fileID: 0}
 --- !u!95 &8329720478506920087
 Animator:
   serializedVersion: 5
