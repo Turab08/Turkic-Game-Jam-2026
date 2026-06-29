@@ -33,12 +33,14 @@ public class ImageScrollManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnFoodCooked += Handle_OnFoodCooked;
+        EventManager.OnFoodRuined += Handle_OnFoodRuined;
         EventManager.OnIngredientMatched += Handle_OnIngredientMatched;
     }
 
     void OnDisable()
     {
         EventManager.OnFoodCooked -= Handle_OnFoodCooked;
+        EventManager.OnFoodRuined -= Handle_OnFoodRuined;
         EventManager.OnIngredientMatched -= Handle_OnIngredientMatched;
     }
 
@@ -209,8 +211,12 @@ public class ImageScrollManager : MonoBehaviour
         spawnInterval = Mathf.Clamp(spawnInterval, 0.75f, 3f);
         scrollSpeed = scrollSpeed * (1f + GameManager.instance.GetDifficultyPercentage());
         scrollSpeed = Mathf.Clamp(scrollSpeed, 1f, 4f); 
-        woodSpawnChance += 0.0066f;
-        woodSpawnChance = Mathf.Clamp(woodSpawnChance, 0.2f, 0.3f);
+        woodSpawnChance += 0.0075f;
+        woodSpawnChance = Mathf.Clamp(woodSpawnChance, 0.2f, 0.35f);
+    }
+    private void Handle_OnFoodRuined()
+    {
+        ChooseNextFood();
     }
 
     private void Handle_OnIngredientMatched(int index, bool reset)

@@ -37,7 +37,7 @@ public class Pot : MonoBehaviour
             if(!ingredientMatched)
             {
                 EventManager.ScoreChanged(penaltyScore);
-                EventManager.FoodCooked();
+                EventManager.FoodRuined();
                 EventManager.DraggingProcess(false, other.gameObject);
                 Destroy(other.gameObject);
                 EventManager.IngredientMatched(0, true);

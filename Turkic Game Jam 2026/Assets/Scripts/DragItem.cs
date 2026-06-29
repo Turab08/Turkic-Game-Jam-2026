@@ -34,10 +34,15 @@ using UnityEngine;
                     }
                     EventManager.DraggingProcess(true, currentDraggedObject);
                 }
-                if (hit.collider != null && hit.collider.CompareTag("Water"))
+                if (hit.collider != null && (hit.collider.CompareTag("Water") || hit.collider.CompareTag("SmallWater")))
                 {
                     WaterDropletAI waterDropletAI = hit.collider.gameObject.GetComponent<WaterDropletAI>();
                     waterDropletAI.Die();
+                }
+                if (hit.collider != null && hit.collider.CompareTag("IceCube"))
+                {
+                    IceCubeAI iceCubeAI = hit.collider.gameObject.GetComponent<IceCubeAI>();
+                    iceCubeAI.Die();
                 }
             }
 

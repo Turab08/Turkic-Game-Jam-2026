@@ -15,6 +15,8 @@ public class Bonfire : MonoBehaviour
 
     public ParticleSystem damageParticle;
 
+    [SerializeField] private GameObject coldPanel;
+
     void OnEnable()
     {
         EventManager.OnFoodCooked += Handle_OnFoodCooked;
@@ -34,6 +36,16 @@ public class Bonfire : MonoBehaviour
         currentSize -= shringSpeed * Time.deltaTime;
         currentSize = Mathf.Clamp(currentSize, minSize, maxSize);
         flames.localScale = new Vector3(flames.localScale.x, currentSize, flames.localScale.z); 
+
+        if (currentSize <= (maxSize + minSize) / 2)
+        {
+            coldPanel.SetActive(true);
+        }
+        else
+        {
+            coldPanel.SetActive(false);
+        }
+
         if(currentSize <= minSize)
         {
             EventManager.GameFinished();
@@ -51,6 +63,20 @@ public class Bonfire : MonoBehaviour
         if (other.gameObject.CompareTag("Water"))
         {
             currentSize -= 0.2f;
+            AudioManager.Instance.PlaySfx(AudioManager.Instance.fireExtinguish);
+            StartCoroutine(PlayParticle());
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("SmallWater"))
+        {
+            currentSize -= 0.1f;
+            AudioManager.Instance.PlaySfx(AudioManager.Instance.fireExtinguish);
+            StartCoroutine(PlayParticle());
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("IceCube"))
+        {
+            currentSize -= 0.5f;
             AudioManager.Instance.PlaySfx(AudioManager.Instance.fireExtinguish);
             StartCoroutine(PlayParticle());
             Destroy(other.gameObject);

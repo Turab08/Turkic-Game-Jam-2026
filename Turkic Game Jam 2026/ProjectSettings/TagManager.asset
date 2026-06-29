@@ -12,6 +12,8 @@ TagManager:
   - QuitButton
   - Pot
   - Cap
+  - IceCube
+  - SmallWater
   layers:
   - Default
   - TransparentFX

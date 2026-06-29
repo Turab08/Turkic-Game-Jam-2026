@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource sfx;
 
     public AudioClip waterSplash;
+    public AudioClip iceCrack;
     public AudioClip ingredientAdded;   
     public AudioClip correctChoice; 
     public AudioClip fireExtinguish;

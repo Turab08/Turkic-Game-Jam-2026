@@ -1,9 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterDropletAI : Enemy
-{    
+public class IceCubeAI : Enemy
+{
     Rigidbody2D rb;
+    [SerializeField] private GameObject waterDroplet;
+
+    [SerializeField] private Transform waterDropletSpawnPos1;
+    [SerializeField] private Transform waterDropletSpawnPos2;
+
 
     private void Awake()
     {
@@ -27,8 +33,11 @@ public class WaterDropletAI : Enemy
 
     private void Death()
     {
+        Instantiate(waterDroplet, waterDropletSpawnPos1.position, Quaternion.identity);
+        Instantiate(waterDroplet, waterDropletSpawnPos2.position, Quaternion.identity);
+
         ParticleSystem particle = Instantiate(deathParticle, transform.position, Quaternion.identity);
-        AudioManager.Instance.PlaySfx(AudioManager.Instance.waterSplash);
+        AudioManager.Instance.PlaySfx(AudioManager.Instance.iceCrack);
         EventManager.InteractableHovered(false, "Attack");
         Destroy(particle.gameObject, 1);
         Destroy(gameObject);

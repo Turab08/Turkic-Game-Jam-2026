@@ -146,7 +146,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.75, y: 1.75}
   m_EdgeRadius: 0
 --- !u!50 &4842580866814338015
 Rigidbody2D:
@@ -187,4 +187,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c09ab292704f456787b6fc5413c0d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabCursorTexture: {fileID: 2800000, guid: b0dab33ed976bef45b4be17b09161af0, type: 3}
