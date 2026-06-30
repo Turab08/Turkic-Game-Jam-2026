@@ -28,7 +28,8 @@ public class ImageScrollManager : MonoBehaviour
     [SerializeField] private float spawnInterval = 1.5f;
 
     private float spawnTimer;
-    private float woodSpawnChance = 0.2f;
+    private float woodSpawnChance = 0.15f;
+    private float originalWoodSpawnChance = 0.15f;
 
     void OnEnable()
     {
@@ -106,12 +107,16 @@ public class ImageScrollManager : MonoBehaviour
         {
             GameObject log = Instantiate(logPrefab, spawnPosition, Quaternion.identity);
             GameManager.instance.AddItem(log);
+            woodSpawnChance = originalWoodSpawnChance;
         }
         else
         {
             GameObject item = Instantiate(foodItemPrefab, spawnPosition, Quaternion.identity);
             AssignRandomFood(item);
             GameManager.instance.AddItem(item);
+
+            woodSpawnChance += 0.0075f;
+            woodSpawnChance = Mathf.Clamp(woodSpawnChance, originalWoodSpawnChance, 1f);
         }
     }
 
@@ -211,8 +216,9 @@ public class ImageScrollManager : MonoBehaviour
         spawnInterval = Mathf.Clamp(spawnInterval, 0.75f, 3f);
         scrollSpeed = scrollSpeed * (1f + GameManager.instance.GetDifficultyPercentage());
         scrollSpeed = Mathf.Clamp(scrollSpeed, 1f, 4f); 
-        woodSpawnChance += 0.0075f;
-        woodSpawnChance = Mathf.Clamp(woodSpawnChance, 0.2f, 0.35f);
+        
+        originalWoodSpawnChance += 0.0075f;
+        originalWoodSpawnChance = Mathf.Clamp(originalWoodSpawnChance, 0.2f, 0.35f);
     }
     private void Handle_OnFoodRuined()
     {

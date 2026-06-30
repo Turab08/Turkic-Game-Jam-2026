@@ -1335,7 +1335,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a18ea1660d0a439480ad81106c45857, type: 2}
   - {fileID: 11400000, guid: 2900945684aa5c14fb22099fde3ddf08, type: 2}
   - {fileID: 11400000, guid: 61452ca192f584612a57a95e39619fe4, type: 2}
-  - {fileID: 11400000, guid: bcf36a2d043280349a3cfffc2b38daf8, type: 2}
   menuItems:
   - {fileID: 11400000, guid: 23616ea7e92f14056ae0d11bb5404216, type: 2}
   - {fileID: 11400000, guid: 1b013d23e81f14467842b7270a0da05e, type: 2}
@@ -1344,7 +1343,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c7a3ce608a39b3c428843ca230a54026, type: 2}
   - {fileID: 11400000, guid: 0efbab0b743cfad41bf53d6d1d5b9bb0, type: 2}
   - {fileID: 11400000, guid: 9731c03e6ae023d4f8689b5fd4af604c, type: 2}
-  - {fileID: 11400000, guid: 11adabfe984d7fd4bb9c391f6681d5f1, type: 2}
   currentFood1: {fileID: 72449320}
   currentFood2: {fileID: 1108876352}
   currentFood3: {fileID: 605323237}
