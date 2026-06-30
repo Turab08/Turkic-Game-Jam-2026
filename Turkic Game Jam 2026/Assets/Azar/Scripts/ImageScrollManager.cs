@@ -8,7 +8,7 @@ public class ImageScrollManager : MonoBehaviour
 {
     [SerializeField] private GameObject foodItemPrefab;
     [SerializeField] private GameObject platePrefab;
-    [SerializeField] private Transform spawnTransform;
+    [SerializeField] private RectTransform spawnTransform;
     [SerializeField] private Transform destroyTransform;
     [SerializeField] private List<FoodData> foodItems;
     [SerializeField] private List<MenuItem> menuItems;
@@ -99,7 +99,8 @@ public class ImageScrollManager : MonoBehaviour
             notSpawnedFoods = new List<FoodData>(foodItems);
         }
 
-        Vector3 spawnPosition = spawnTransform.position;
+        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(null, spawnTransform.position);
+        Vector3 spawnPosition = new Vector3(screenPos.x, screenPos.y, 0f);
         GameObject plate = Instantiate(platePrefab, spawnPosition, Quaternion.identity);
         plateObjects.Add(plate);
         float rand = UnityEngine.Random.Range(0f, 1f);
